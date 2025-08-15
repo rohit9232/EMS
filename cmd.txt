@@ -1,0 +1,22 @@
+sudo systemctl start mongod
+sudo systemctl status mongod
+
+sudo systemctl daemon-reload
+sudo systemctl restart mongod
+# Optional: auto-start MongoDB at boot
+sudo systemctl enable mongod
+
+cd server
+npm install
+node -r dotenv/config userSeed.js dotenv_config_path=.env
+npm start
+
+cd frontend
+npm install
+npm install react-data-table-component styled-components
+npm pkg set dependencies.react=^18.3.1
+npm pkg set dependencies.react-dom=^18.3.1
+npm install
+npm install -D @tailwindcss/postcss
+# edit frontend/postcss.config.js to use '@tailwindcss/postcss' in plugins
+npm run dev
